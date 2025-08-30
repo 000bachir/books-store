@@ -1,261 +1,47 @@
-<!--TODO : need to see how can i end the timeline on destroy-->
-
-<!-- <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	import gsap from 'gsap';
-	import ScrollTrigger from 'gsap/ScrollTrigger';
-
-	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
-		let selectedWords = document.getElementById('animated-words') as HTMLElement;
-		let animationTriggerPoint = document.getElementById('animation-start') as HTMLDivElement;
-		let animatedWords = gsap.utils.toArray<HTMLElement>('.animated-word');
-
-		if (!selectedWords || animatedWords.length === 0 || !animationTriggerPoint) {
-			console.error('failed to load elements, please refer to the console or the dev tool');
-			return;
-		}
-		let timeline = gsap.timeline({
-			scrollTrigger: {
-				trigger: animationTriggerPoint,
-				start: '-150px top',
-				end: 'bottom bottom',
-				scrub: 1.5
-			}
-		});
-		//---!getComputedStyle  only accepts one element that is why i only the first word color
-		const currentColor = getComputedStyle(animatedWords[0]).color;
-		// timeline.fromTo(
-		// 	animatedWords,
-		// 	{ color: currentColor },
-		// 	{
-		// 		duration: 1.2,
-		// 		stagger: 0.75,
-		// 		color: () => {
-		// 			let colors = [
-		// 				'#03045e',
-		// 				'#262d79',
-		// 				'#475492',
-		// 				'#677bab',
-		// 				'#88a2c4',
-		// 				'#a9c9dd',
-		// 				'#caf0f6'
-		// 			];
-		// 			return colors[Math.floor(Math.random() * colors.length)];
-		// 		}
-		// 	}
-		// );
-		timeline.to(
-			animatedWords,
-			{
-				duration: 1.2,
-				stagger: 0.75,
-                immediateRender : false,
-				color: () => {
-					let colors = [
-						'#03045e',
-						'#262d79',
-						'#475492',
-						'#677bab',
-						'#88a2c4',
-						'#a9c9dd',
-						'#caf0f6'
-					];
-					return colors[Math.floor(Math.random() * colors.length)];
-				}
-			}
-		);
-	});
-
-	onDestroy(() => {
-		ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-	});
-</script> -->
-<!-- 
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import gsap from 'gsap';
-    import ScrollTrigger from 'gsap/ScrollTrigger';    
+	import { gsap } from 'gsap'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { tick } from 'svelte';
 
-
-    
-    
-	function WordsChangingColorAnimation() {
-
-        const animatedWords = gsap.utils.toArray<HTMLElement>('.animated-word');
-            const animationTriggerPoint = document.getElementById('animation-start');
-
-		if (!animationTriggerPoint || animatedWords.length === 0) {
-			console.error('failled to load elements in the dom');
-			return;
+	let timeline : gsap.core.Timeline
+	onMount(()=>{
+		gsap.registerPlugin(ScrollTrigger)
+		let animatedWords = gsap.utils.toArray<HTMLElement>(".animated-word")
+		let triggerAnimation = document.getElementById('animation-start') as HTMLElement
+		if(animatedWords.length === 0 || !triggerAnimation ){
+			console.error("failed to load the elements in the dom please check the dev tool")
+			return
 		}
-
-		let timeline: gsap.core.Timeline = gsap.timeline({
-			scrollTrigger: {
-				trigger: animationTriggerPoint,
-				start: '-150px top',
-				end: 'bottom bottom',
-				scrub: 1.5
+		timeline = gsap.timeline({
+			scrollTrigger : {
+				trigger : triggerAnimation , 
+				start : '-150px top',
+				end : 'bottom bottom',
+				scrub : 1.5
 			}
-		});
+		})
+		tick().then(()=>{
+			timeline.fromTo(animatedWords,{
+				opacity : 0 ,
+				scale : 0
+			},{
+				opacity : 1 ,
+				scale : 1 ,
+				stagger : 1.5,
+				duration : 1.4,
+			})
+		})
+	})
 
-		timeline.to(animatedWords, {
-			duration: 1.2,
-			stagger: 0.75,
-			color: () => {
-				let colors = ['#03045e', '#262d79', '#475492', '#677bab', '#88a2c4', '#a9c9dd', '#caf0f6'];
-				return colors[Math.floor(Math.random() * colors.length)];
-			}
-		});
-		return timeline;
-	}
-
-	onMount(async() => {
-
-        const gsap = (await import('gsap')).default;
-		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-
-
-		let timeline = WordsChangingColorAnimation();
-
-		const observer = new MutationObserver(() => {
-			if (timeline) {
-				timeline.kill();
-			}
-			// re building with new colors
-			timeline = WordsChangingColorAnimation();
-		});
-
-		observer.observe(document.documentElement, {
-			attributes: true,
-			attributeFilter: ['class']
-		});
-	});
-
-	onDestroy(() => {
-		let timeline = WordsChangingColorAnimation();
-
-		const observer = new MutationObserver(() => {
-			if (timeline) {
-				timeline.kill();
-			}
-			// re building with new colors
-			timeline = WordsChangingColorAnimation();
-		});
-	});
-</script> -->
-<script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import  gsap  from 'gsap';
-    import ScrollTrigger from 'gsap/dist/ScrollTrigger';
-	
-	let timeline: gsap.core.Timeline | null = null;
-	let observer: MutationObserver | null = null;
-
-	async function WordsChangingColorAnimation() {
-		
-
-		const animatedWords = gsap.utils.toArray<HTMLElement>('.animated-word');
-		const animationTriggerPoint = document.getElementById('animation-start');
-		
-		if (!animationTriggerPoint || animatedWords.length === 0) {
-			console.error('Failed to load elements in the DOM');
-			return null;
+	onDestroy(()=>{
+		if(timeline){
+			timeline.kill()
 		}
-
-		// Register plugin if not already registered
-			gsap.registerPlugin(ScrollTrigger);
-		
-
-		const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: animationTriggerPoint,
-				start: '-150px top',
-				end: 'bottom bottom',
-				scrub: 1.5
-			}
-		});
-
-		const colors = ['#03045e', '#262d79', '#475492', '#677bab', '#88a2c4', '#a9c9dd', '#caf0f6'];
-
-		tl.to(animatedWords, {
-			duration: 1.2,
-			stagger: 0.75,
-			color: (index: number) => {
-				return colors[index % colors.length]; 
-			}
-		});
-
-		return tl;
-	}
-
-	async function initializeAnimation() {
-		try {
-            timeline = await WordsChangingColorAnimation();
-			// Clean up existing timeline
-			if (timeline) {
-				timeline.kill();
-				timeline = null;
-			}
-
-			// Wait a tick to ensure DOM is ready
-			await new Promise(resolve => setTimeout(resolve, 0));
-			
-		} catch (error) {
-			console.error('Error initializing animation:', error);
-		}
-	}
-
-	onMount(async () => {
-		try {
-			// Dynamic imports for GSAP
-			const gsapModule = await import('gsap');
-			const scrollTriggerModule = await import('gsap/ScrollTrigger');
+		ScrollTrigger.getAll().forEach((trigger => trigger.kill()))
+	})
 
 
-			// Initialize first animation
-			await initializeAnimation();
-
-			// Watch for dark/light mode changes or other class changes
-			observer = new MutationObserver(async (mutations) => {
-				const hasClassChange = mutations.some(
-					mutation => mutation.type === 'attributes' && mutation.attributeName === 'class'
-				);
-				
-				if (hasClassChange) {
-					await initializeAnimation();
-				}
-			});
-
-			observer.observe(document.documentElement, {
-				attributes: true,
-				attributeFilter: ['class']
-			});
-		} catch (error) {
-			console.error('Error setting up GSAP animation:', error);
-		}
-	});
-
-	onDestroy(() => {
-		// Clean up timeline
-		if (timeline) {
-			timeline.kill();
-			timeline = null;
-		}
-
-		// Clean up observer
-		if (observer) {
-			observer.disconnect();
-			observer = null;
-		}
-
-		// Clean up ScrollTrigger instances
-		if (gsapInstance?.plugins?.ScrollTrigger) {
-			gsapInstance.plugins.ScrollTrigger.getAll().forEach((trigger: any) => {
-				trigger.kill();
-			});
-		}
-	});
 </script>
 
 <main class="relative mx-auto h-auto w-full overflow-hidden">
@@ -314,6 +100,11 @@
 			>
 				<img src="/gifs/real_target.gif" loading="lazy" class="aspect-square h-64" alt="" />
 			</div>
+		</article>
+
+		<article class="h-20 w-full relative flex items-center justify-center flex-col gap-5">
+			<h1 class="text-2xl font-semibold" >So i decided to build this to help me</h1>
+			<span class = "text-sm">this is a personal project that if someone use i might make a bit of money 😅</span>
 		</article>
 	</section>
 </main>
