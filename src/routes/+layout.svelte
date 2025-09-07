@@ -10,13 +10,7 @@
 <svelte:head>
 	<link rel="icon" href={websiteIcon} />
 </svelte:head>
-
-
-
-
 <ModeWatcher />
-
-
 <Navbar />
 
 {@render children?.()}

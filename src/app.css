@@ -122,6 +122,17 @@
     border: 1px solid rgba(14, 14, 14, 0.02);
   }
 
+  /*
+    ! to dispaly the books in form of a grid
+  */
+
+  .book-display{
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(20rem , 1fr));
+    gap: 2rem;
+    margin-top: 2rem;  
+  }
+
   
 
 }
