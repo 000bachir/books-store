@@ -1,0 +1,27 @@
+<script lang="ts">
+	import Button from "$lib/components/ui/button/button.svelte";
+  let isOpen : boolean = $state(false);
+  let {children} = $props()
+</script>
+
+<div class="flex">
+  <!-- Sidebar -->
+  <div
+    class="absolute inset-0 h-full w-64 bg-black dark:bg-gray-300  shadow-lg transform transition-transform duration-300 ease-in-out p-4 {isOpen ? 'translate-x-0' : '-translate-x-full'}">
+    <Button class="mb-4 px-3 py-1 rounded dark:bg-white " onclick={() => (isOpen = false)}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 20 20"><path fill="currentColor" d="M2.93 17.07A10 10 0 1 1 17.07 2.93A10 10 0 0 1 2.93 17.07M11.4 10l2.83-2.83l-1.41-1.41L10 8.59L7.17 5.76L5.76 7.17L8.59 10l-2.83 2.83l1.41 1.41L10 11.41l2.83 2.83l1.41-1.41L11.41 10z"/></svg>
+    </Button>
+    <ul class="space-y-2">
+      <li><a href="/" class="text-lg font-semibold dark:text-black text-white">Sidebar Item 1</a></li>
+      <li><a href="/" class="text-lg font-semibold dark:text-black text-white">Sidebar Item 2</a></li>
+    </ul>
+  </div>
+  <!-- Main content -->
+  <div class="flex-1 transition-all duration-300 ease-in-out" style="margin-left: {isOpen ? '16rem' : '0'}">
+    <Button type={"button"} size={"lg"} variant={"default"} class="cursor-pointer m-4 px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600" onclick={() => (isOpen = true)}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M1 11h22v2H1zm0 8h22v2H1zM1 3h22v2H1z"/></svg>
+    </Button>
+    <!-- Render child pages here -->
+    {@render children()}
+  </div>
+</div>
