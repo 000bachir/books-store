@@ -1,12 +1,13 @@
+<!--TODO : add responsiveness later-->
 <script lang="ts">
-	import { Dropdown, DropdownItem, Button, DarkMode } from 'flowbite-svelte';
 	import { page } from '$app/state';
-	let activeUrl: string = $derived(page.url.pathname);
-	import LightIcon from '$lib/components/ui/svgIcons/LightIcon.svelte';
-	import MoonIcon from '$lib/components/ui/svgIcons/MoonIcon.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import ToggleMode from '$lib/components/widgets/ToggleMode.svelte';
+	import Settings  from '@lucide/svelte/icons/settings';
+	import { Input } from "$lib/components/ui/input/index.js";	
 </script>
 
-<nav class="relative mx-auto grid h-[95%] w-[95%] grid-cols-3">
+<nav class="relative mx-auto grid h-[95%] w-[95%] grid-cols-4">
 	<div id="logo_name_of_the_website" class=" col-span-1 flex items-center justify-center">
 		<a href="/" class="flex gap-2">
 			<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
@@ -38,29 +39,26 @@
 			<h1 class="text-3xl font-semibold">Bookify</h1>
 		</a>
 	</div>
-	<div id="categories_and_search_filter" class="col-span-2 flex items-center justify-center">
-		<!-- <Button class="flex items-center justify-center gap-2 text-black" color="blue">
-			<h1>Dropdown button</h1>
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-				><path
-					fill="currentColor"
-					d="M16.707 13.293a1 1 0 0 0-1.414 0L13 15.586V8a1 1 0 1 0-2 0v7.586l-2.293-2.293a.999.999 0 1 0-1.414 1.414L12 19.414l4.707-4.707a1 1 0 0 0 0-1.414"
-				/></svg
-			>
-		</Button> -->
-		<!-- <Dropdown {activeUrl} simple offset={5}>
-			<DropdownItem href="/">Home</DropdownItem>
-			<DropdownItem href="/docs/components/dropdown">Dropdown</DropdownItem>
-			<DropdownItem href="/docs/components/accordion">Accordion</DropdownItem>
-			<DropdownItem href="/docs/components/alert">Alert</DropdownItem>
-		</Dropdown> -->
+	<div id="categories_and_search_filter" class="col-span-2 flex items-center justify-evenly overflow-hidden">
+		<Button variant={"default"} size={"lg"}>
+			<a href="/Categories" class="text-lg font-semibold ">View Categories</a>
+		</Button>
 
-		<DarkMode>
-			<button
-				class="text-white "
-			>
-			<img src="" alt="">
-			</button>
-		</DarkMode>
+		<Input placeholder="search for a book" type="search" />
+
 	</div>
+
+	<div id="toggle_switch_mode_settings" class="col-span-1 flex items-center justify-center ">
+		<div class="h-[95%] w-full relative overflow-hidden grid grid-cols-2">
+			<div class="h-full w-full relative flex items-center justify-center ">
+				<ToggleMode />
+			</div>
+			<div class="h-full w-full relative flex items-center justify-center">
+				<Settings />
+			</div>
+		</div>
+	</div>
+
+
+
 </nav>
