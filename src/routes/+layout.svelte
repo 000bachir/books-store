@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	import '../app.css';
-	import websiteIcon from '$lib/assets/icons/icons-knowledge-logo.svg';
+	import websiteIcon from '$lib/assets/icons/logo_website.svg';
 	import Navbar from '$lib/LayoutComponents/Header/Navbar.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import HomeIcon from '$lib/components/widgets/svgIcons/HomeIcon.svelte';
