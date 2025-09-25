@@ -1,3 +1,4 @@
+<!-- ! do not forget about the responsiveness -->
 <script lang="ts">
 	import LimitlessLibrary from '$lib/assets/icons/Learning-rafiki.svg';
 	import bookLover from '$lib/assets/icons/Book lover-bro.svg';
