@@ -16,7 +16,7 @@
             <div class="w-full dark:border-white border-2"></div>
         </div>
         <div class="flex-3/12  h-full w-full flex items-center justify-start">
-            <Button href="/best-seller" variant={"link"} size={"lg"} class="text-xl">
+            <Button href="/best-seller" variant={"ghost"} size={"lg"} class="text-xl">
                 View All
             </Button>
         </div>
