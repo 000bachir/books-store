@@ -65,6 +65,34 @@ export interface GoogleBookItem {
   };
 }
 
+// ? categories that might be found in the api of google 
+
+export const bookCategories: string[] = [
+  'Fiction',
+  'Science Fiction',
+  'Fantasy',
+  'Mystery & Detective',
+  'Thriller',
+  'Romance',
+  'Historical Fiction',
+  'Young Adult',
+  'Children’s',
+  'Nonfiction',
+  'Biography & Memoir',
+  'Self-Help',
+  'Health, Mind & Body',
+  'Religion & Spirituality',
+  'Science',
+  'History',
+  'Art & Photography',
+  'Business & Economics',
+  'Travel',
+  'Cookbooks, Food & Wine',
+  'Comics & Graphic Novels',
+  'Poetry',
+  'Humor'
+];
+
 
 
 /**
@@ -72,8 +100,8 @@ export interface GoogleBookItem {
  */
 
 export interface NytIsbn {
-  isbn10: string;
-  isbn13: string;
+  isbn10: string | number;
+  isbn13: string | number;
 }
 
 export interface NytBuyLink {
