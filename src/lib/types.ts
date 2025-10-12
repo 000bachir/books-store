@@ -67,32 +67,31 @@ export interface GoogleBookItem {
 
 // ? categories that might be found in the api of google 
 
-export const bookCategories: string[] = [
-  'Fiction',
-  'Science Fiction',
-  'Fantasy',
-  'Mystery & Detective',
-  'Thriller',
-  'Romance',
-  'Historical Fiction',
-  'Young Adult',
-  'Children’s',
-  'Nonfiction',
-  'Biography & Memoir',
-  'Self-Help',
-  'Health, Mind & Body',
-  'Religion & Spirituality',
-  'Science',
-  'History',
-  'Art & Photography',
-  'Business & Economics',
-  'Travel',
-  'Cookbooks, Food & Wine',
-  'Comics & Graphic Novels',
-  'Poetry',
-  'Humor'
+export const bookCategories = [
+  { name: 'Fiction', slug: 'fiction' },
+  { name: 'Science Fiction', slug: 'science-fiction' },
+  { name: 'Fantasy', slug: 'fantasy' },
+  { name: 'Mystery & Detective', slug: 'mystery-detective' },
+  { name: 'Thriller', slug: 'thriller' },
+  { name: 'Romance', slug: 'romance' },
+  { name: 'Historical Fiction', slug: 'historical-fiction' },
+  { name: 'Young Adult', slug: 'young-adult' },
+  { name: 'Children’s', slug: 'children' },
+  { name: 'Nonfiction', slug: 'nonfiction' },
+  { name: 'Biography & Memoir', slug: 'biography-memoir' },
+  { name: 'Self-Help', slug: 'self-help' },
+  { name: 'Health, Mind & Body', slug: 'health-mind-body' },
+  { name: 'Religion & Spirituality', slug: 'religion-spirituality' },
+  { name: 'Science', slug: 'science' },
+  { name: 'History', slug: 'history' },
+  { name: 'Art & Photography', slug: 'art-photography' },
+  { name: 'Business & Economics', slug: 'business-economics' },
+  { name: 'Travel', slug: 'travel' },
+  { name: 'Cookbooks, Food & Wine', slug: 'cookbooks-food-wine' },
+  { name: 'Comics & Graphic Novels', slug: 'comics-graphic-novels' },
+  { name: 'Poetry', slug: 'poetry' },
+  { name: 'Humor', slug: 'humor' }
 ];
-
 
 
 /**

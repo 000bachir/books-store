@@ -1,6 +1,15 @@
+<!--this where am displaying the books based on categories-->
+
 <script lang="ts">
 	import Button from "$lib/components/ui/button/button.svelte";
     import { bookCategories } from "$lib/types";
+    import { goto } from "$app/navigation";
+    
+
+    function GotoCategory(slug : any){
+        goto(`/books/${slug}`);
+    }
+
 </script>
 
 
@@ -16,8 +25,8 @@
 
         {#if bookCategories.length != 0}
             {#each bookCategories as book }
-                <Button size={"lg"} variant={"default"} class="cursor-pointer">
-                    {book}
+                <Button size={"lg"} variant={"default"} onclick={()=> GotoCategory(book.slug)} class="cursor-pointer">
+                    {book.name}
                 </Button>
             {/each}
         {/if}
