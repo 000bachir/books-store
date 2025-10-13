@@ -41,7 +41,7 @@
 	</div>
 	<div id="categories_and_search_filter" class="col-span-2 flex items-center justify-evenly overflow-hidden">
 		<Button variant={"default"} size={"lg"}>
-			<a href="/Categories" class="text-lg font-semibold ">View Categories</a>
+			<a href="/books" class="text-lg font-semibold ">View Categories</a>
 		</Button>
 
 		<Input placeholder="search for a book" type="search" />

@@ -43,6 +43,7 @@ export interface GoogleBookItem {
     country: string;
     saleability: string;
     isEbook: boolean;
+    buyLink : string
   };
   accessInfo?: {
     country: string;

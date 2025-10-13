@@ -14,7 +14,7 @@
 
 
 <main class="h-auto w-full relative overflow-hidden">
-    <section class="h-auto w-[95%] relative mx-auto flex flex-wrap items-center py-8 gap-10">
+    <section class="h-auto w-[95%] relative mx-auto flex flex-wrap items-center py-8 gap-10 ">
         {#if bookCategories.length === 0}
             <div class="flex items-center justify-center py-8">
                 <p class="text-lg font-semibold text-red-400">

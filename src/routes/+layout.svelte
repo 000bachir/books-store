@@ -5,36 +5,14 @@
 	import websiteIcon from '$lib/assets/icons/logo_website.svg';
 	import Navbar from '$lib/LayoutComponents/Header/Navbar.svelte';
 	import { ModeWatcher } from 'mode-watcher';
-	import HomeIcon from '$lib/components/widgets/svgIcons/HomeIcon.svelte';
-	import ContactIcon from '$lib/components/widgets/svgIcons/ContactIcon.svelte';
-	import Summary from '$lib/components/widgets/svgIcons/Summary.svelte';
+
 	import Button from '$lib/components/ui/button/button.svelte';
 	let { children } = $props();
 
-	// export type linkItem = {
-	// 	href: string;
-	// 	icon: HomeIcon;
-	// };
-
-	// let links: Record<string, linkItem> = {
-	// 	"Home": {
-	// 		href: '/',
-	// 		icon: HomeIcon
-	// 	},
-	// 	"Contact": {
-	// 		href: '/Contact',
-	// 		icon: ContactIcon
-	// 	},
-	// 	"Summary": {
-	// 		href: '/Summary',
-	// 		icon: Summary
-	// 	}
-	// };
-
 	let links: Record<string, string> = {
 		Home: '/',
-		Summary: '/Summary',
-		Contact: '/Contact'
+		Summary: '/summary',
+		Contact: '/contact'
 	};
 </script>
 

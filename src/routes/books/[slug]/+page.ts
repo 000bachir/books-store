@@ -12,8 +12,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
         }
 
         const data = await request.json()
-        console.log(data.items[2].saleInfo)
-        console.log(data.items[2].volumeInfo)
 
         return {
             slug,
